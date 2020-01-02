@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://websygen.github.io/owfont/css/owfont-regular.css" rel="stylesheet" type="text/css">
+    <link href="styles.css" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer src="app.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Weather App</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h4>Location - City Name / ID</h4>
+                <input type="text" name="search" id="name-zip-value" placeholder="Name/Zip">
+                <button type="submit" id="name-id">Search</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>Location - Long / Lat</h4>
+                <input type="text" name="search" id="longitude" placeholder="longitude">
+                <input type="text" name="search" id="latitude" placeholder="latitude">
+                <button type="submit" id="long-lat">Search</button>
+            </div>
+        </div>
+
+        <div class="row app">
+            <div class="col">
+                <div class="weather"></div>
+            </div>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="precip" href="#">Precipitation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="airTemp" href="#">Air Tempature</a>
+            </li>
+        </ul>
+        <div class="row">
+            <div class="maps"></div>
+        </div>
+    </div>
+</body>
+
+</html>

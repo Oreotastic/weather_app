@@ -1,0 +1,24 @@
+.container {
+    margin: auto;
+    text-align: center;
+}
+
+.app {
+    margin-top: 20px;
+}
+
+.weather {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+}
+
+.weather .sub-info {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+i {
+    margin: auto;
+}
