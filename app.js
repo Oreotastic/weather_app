@@ -8,14 +8,21 @@ const APIKEY = '360e8777ac9194f30e107ccb32cfb293'
 
 let name, zip, long, lat
 
-const grabNameIdData = (name, zip) => {
-    const nameData = axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&APPID=${APIKEY}&units=imperial`)
+const grabNameIdData = (name, id) => {
 
-    const zipData = axios.get(`api.openweathermap.org/data/2.5/weather?zip=${zip}&APPID=${APIKEY}&units=imperial`)
+    if(typeof id === 'object') {
+        const idData = axios.get(`api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=${APIKEY}`)
 
-    const map = axios.get(`https://tile.openweathermap.org/map/${'precipitation_new'}/${2}/${1}/${1}.png?appid=${APIKEY}`)
+        const nameData = axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&APPID=${APIKEY}&units=imperial`)
 
-    return Promise.all([nameData.catch(err=>err), zipData.catch(err=>err), map.catch(err=>err)])
+        return Promise.all([nameData.catch(err=>err), idData.catch(err=>err)])
+    } else {
+        const idData = axios.get(`api.openweathermap.org/data/2.5/weather?zip=${id}&APPID=${APIKEY}&units=imperial`)
+
+        const nameData = axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&APPID=${APIKEY}&units=imperial`)
+
+        return Promise.all([nameData.catch(err=>err), idData.catch(err=>err)])
+    }
 }
 
 const processNameZipData = (name, zip) => {
@@ -47,10 +54,15 @@ const renderHtml = (data) => {
 }
 
 nameIdSearch.addEventListener('click', () => {
-    name = document.querySelector('#name-zip-value').value
-    id = document.querySelector('#name-zip-value').value
+    if(document.querySelector('#name-zip-value').value.includes('/')) {
+        id = document.querySelector('#name-zip-value').value.split('/')
+        
+    } else {
+        id = document.querySelector('#name-zip-value').value
+        name = document.querySelector('#name-zip-value').value
+    }
     
-    processNameZipData(name, zip)
+    processNameZipData(name, id)
     .then(response => response)
     .then((data) => (data[0].data ? data[0].data : data[1].data))
     .then(weather => renderHtml(weather))
