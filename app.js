@@ -11,7 +11,7 @@ let name, zip, long, lat
 const grabNameIdData = (name, id) => {
 
     if(typeof id === 'object') {
-        const idData = axios.get(`api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=${APIKEY}`)
+        const idData = axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${id[0]}&lon=${id[1]}&appid=${APIKEY}&units=imperial`)
 
         const nameData = axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&APPID=${APIKEY}&units=imperial`)
 
@@ -33,7 +33,7 @@ const processNameZipData = (name, zip) => {
 const renderHtml = (data) => {
     const descData = data.weather[0]
     const tempData = data.main
-    console.log(data)
+    
     weatherDisplay.innerHTML = 
     `<i class="owf owf-${descData.id} owf-5x"></i>
     <div class="sub-info">
@@ -42,9 +42,9 @@ const renderHtml = (data) => {
     </div>
     <div class="sub-info">
         <h3>Temperature</h3>
-        <p>${tempData.temp}F</p>
+        <p>${tempData.temp}°F</p>
         <h6>Feels Like</h6>
-        <p>${tempData.feels_like}</p>
+        <p>${tempData.feels_like}°F</p>
     </div>
     <div class="sub-info">
         <h3>Humidity<h3>
